@@ -1,32 +1,41 @@
 {
   "expo": {
-    "name": "NetflixV4",
-    "slug": "NetflixV4",
+    "name": "Netflix",
+    "slug": "Netflix",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "backgroundColor": "#000"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/favicon.png"
     }
+  },
+  "androidStatusBar": {
+    "backgroundColor": "#ffffff",
+    "barStyle": "dark-content"
+  },
+  "notification": {
+    "icon": "./app/assets/icon.png",
+    "color": "#311b92",
+    "androidMode": "default",
+    "androidCollapsedTitle": "Updates from Colab.notes",
+    "iosDisplayInForeground": true
   }
 }
