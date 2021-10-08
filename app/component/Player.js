@@ -10,9 +10,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import moviegenres from "../config/moviegenres";
 import * as Notifications from "expo-notifications";
+import YoutubeSearchApi from 'youtube-search-api';
 
 const Player = ({ index, name, desc, rawgenres }) => {
   const [genres, setgenres] = useState([]);
+  const [videoId, setVideoId] = useState("");
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowAlert: true,
@@ -21,7 +23,13 @@ const Player = ({ index, name, desc, rawgenres }) => {
     }),
   });
 
+  const getVideoIByName = (name) => {
+    YoutubeSearchApi.GetListByKeyword(name)
+         .then((response) => { setVideoId(response.items[0].id) })
+  } 
+
   useEffect(() => {
+    getVideoIByName(`${name} trailer`)
     const findgenre = (array) => {
       let l = [];
       array?.map((i) => {
@@ -33,29 +41,6 @@ const Player = ({ index, name, desc, rawgenres }) => {
     };
     findgenre(rawgenres);
   }, []);
-  
-  const trailers = [
-    "ccp8T3Me4f4",
-    "Ncra_hUVtMM",
-    "Nu5z3AT2jv8",
-    "pK1cWze6ozY",
-    "vYZSxXcwJmw",
-    "3YhXk5nJotI",
-    "WZCxI1qv310",
-    "Oqv81BdRs7w",
-    "8rn14asTdUk",
-    "96412_ZN_XM",
-    "doEPatuzkQ8",
-    "i2qDt5D8RSs",
-    "IJH_q5k1HZA",
-    "5_4SW8HHfUs",
-    "WHyBvEH2Zr0",
-    "0mz_ImwSOpM",
-    "ZXApnj-ztIE",
-    "Y1si6GmjXKc",
-    "7rI56NmD33Y",
-    "n1eUfnKhhpo"
-  ]
 
   const handle = async (e) => {
     const { granted } = await Notifications.requestPermissionsAsync();
@@ -75,27 +60,29 @@ const Player = ({ index, name, desc, rawgenres }) => {
   const [ready, setready] = useState(false);
   return (
     <View style={styles.con}>
-      <YoutubePlayer
-        width={"100%"}
-        height={200}
-        play={true}
-        videoId={trailers[index]}
-        mute={true}
-        forceAndroidAutoplay={true}
-        initialPlayerParams={{
-          loop: true,
-          controls: true,
-        }}
-        startInLoadingState={true}
-        renderLoading={() => (
-          <Image
-            uri={"../assets/splash.png"}
-            preview={{
-              uri: "https://silicophilic.com/wp-content/uploads/2019/11/Netflix_Thumbnails_not_loading.jpg",
-            }}
-          />
-        )}
-      />
+      {videoId !== "" && (
+        <YoutubePlayer
+              width={"100%"}
+              height={200}
+              play={false}
+              videoId={videoId}
+              mute={true}
+              forceAndroidAutoplay={false}
+              initialPlayerParams={{
+                loop: false,
+                controls: true,
+              }}
+              startInLoadingState={true}
+              renderLoading={() => (
+                <Image
+                  uri={"../assets/splash.png"}
+                  preview={{
+                    uri: "https://silicophilic.com/wp-content/uploads/2019/11/Netflix_Thumbnails_not_loading.jpg",
+                  }}
+                />
+              )}
+            />
+      )}
       <View style={styles.row}>
         <Text
           style={{

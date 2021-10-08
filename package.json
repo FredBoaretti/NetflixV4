@@ -45,7 +45,9 @@
     "react-native-webview": "11.6.2",
     "react-native-youtube": "^2.0.1",
     "react-native-youtube-iframe": "*",
-    "react-redux": "^7.2.4"
+    "react-redux": "^7.2.4",
+    "youtube-api-search": "^0.0.5",
+    "youtube-search-api": "^1.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
